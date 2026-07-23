@@ -18,7 +18,7 @@ import streamlit as st
 import textwrap
 from datetime import datetime
 
-APP_VERSION = "v1.10.1 – GitHub Release"
+APP_VERSION = "v1.10.2-test – Theme-Independent Mobile Display"
 
 st.set_page_config(
     page_title="H.A.R.T - HEAT ASSESSMENT & RESPONSE TOOL",
@@ -39,7 +39,7 @@ st.markdown("""
   --card-fg: #0b2239;
   --card-muted: #334155;
 }
-@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark) and (max-width: 0px){
   :root{
     --card-bg: #0b1220;
     --card-fg: #e5e7eb;
@@ -146,7 +146,7 @@ div[data-testid="stHorizontalBlock"] {
 /* =========================
    Mobile + Dark-mode contrast fixes (v3)
    ========================= */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) and (max-width: 0px) {
   .ui-strong, .ui-subtle, .ui-note, .ui-caption, .ui-help, .stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span, label, .stCaption {
     color: rgba(255,255,255,0.92) !important;
     opacity: 1 !important;
@@ -161,7 +161,7 @@ div[data-testid="stHorizontalBlock"] {
     color: rgba(255,255,255,0.90) !important;
   }
 }
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) and (max-width: 0px) {
   .ui-strong, .ui-subtle, .ui-note, .ui-caption, .ui-help, .stMarkdown, .stMarkdown p, .stMarkdown li, .stMarkdown span, label, .stCaption {
     color: rgba(20,20,20,0.96) !important;
     opacity: 1 !important;
@@ -400,6 +400,112 @@ div[data-testid="stNumberInput"] input,
 div[data-testid="stTextInput"] input {
     color: #075985 !important;
     font-weight: 800 !important;
+}
+
+
+
+/* ================================================================
+   HART FIXED FIELD THEME — v1.10.2-test
+   The app deliberately uses one high-contrast light palette regardless
+   of Android/iOS/browser dark mode or battery-saving theme changes.
+   ================================================================ */
+:root {
+    color-scheme: light !important;
+    --card-bg: #ffffff !important;
+    --card-fg: #102a43 !important;
+    --card-muted: #334e68 !important;
+}
+
+html, body, [data-testid="stAppViewContainer"], .stApp {
+    background-color: #ffffff !important;
+    color: #172b3a !important;
+    color-scheme: light !important;
+}
+
+[data-testid="stAppViewContainer"] > .main,
+[data-testid="stMain"],
+[data-testid="stMainBlockContainer"],
+div.block-container {
+    background-color: #ffffff !important;
+    color: #172b3a !important;
+}
+
+/* Streamlit-native text: never inherit a phone/browser dark palette. */
+[data-testid="stMarkdownContainer"],
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li,
+[data-testid="stMarkdownContainer"] span,
+[data-testid="stCaptionContainer"],
+.stCaption, label {
+    color: #172b3a !important;
+    opacity: 1 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #102a43 !important;
+}
+
+/* Inputs and expanders: fixed light surfaces. */
+div[data-baseweb="input"],
+div[data-baseweb="input"] > div,
+div[data-baseweb="select"] > div,
+div[data-testid="stNumberInput"] input,
+div[data-testid="stTextInput"] input,
+div[data-testid="stSelectbox"] > div > div,
+div[data-testid="stExpander"] {
+    background-color: #ffffff !important;
+    color: #102a43 !important;
+}
+
+div[data-testid="stExpander"] summary,
+div[data-testid="stExpander"] summary *,
+div[data-testid="stExpander"] [data-testid="stMarkdownContainer"],
+div[data-testid="stExpander"] [data-testid="stMarkdownContainer"] * {
+    color: #102a43 !important;
+    opacity: 1 !important;
+}
+
+/* Buttons retain clear contrast on the fixed light app surface. */
+div.stButton > button,
+div[data-testid="stDownloadButton"] > button {
+    background-color: #ffffff !important;
+    color: #102a43 !important;
+    border-color: #9fb3c8 !important;
+}
+div.stButton > button *,
+div[data-testid="stDownloadButton"] > button * {
+    color: inherit !important;
+}
+
+/* HART pale information cards must always use dark ink. */
+.sa-card, .sa-card *,
+.kpi-card, .kpi-card *,
+.ecce-detail-box, .ecce-detail-box *,
+.white-card, .white-card * {
+    color: #102a43 !important;
+    opacity: 1 !important;
+}
+.ecce-detail-box { background:#e8f3ff !important; }
+
+/* Preserve intentionally dark/colored banners that require light lettering. */
+.welcome-box, .welcome-box *,
+.sticky-action, .sticky-action *,
+.supervisor-decision-banner, .supervisor-decision-banner * {
+    color: #ffffff !important;
+}
+
+/* Improve borders/dividers on phones. */
+hr { border-top-color: #cbd5e1 !important; }
+
+@media (max-width: 700px) {
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] li {
+        line-height: 1.42 !important;
+    }
+    .sa-card, .ecce-detail-box, .kpi-card {
+        font-size: 0.92rem !important;
+        line-height: 1.40 !important;
+    }
 }
 
 </style>
@@ -2525,7 +2631,7 @@ div.block-container { padding-top: 1.05rem; padding-bottom: 1.15rem; }
    ========================================================= */
 
 /* Main page text must follow the actual dark Streamlit canvas. */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) and (max-width: 0px) {
   body, .stApp, .stMarkdown, .stText,
   div[data-testid="stMarkdownContainer"],
   div[data-testid="stMarkdownContainer"] p,
