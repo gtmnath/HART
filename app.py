@@ -4,7 +4,7 @@
 """
 HART — Heat Assessment & Response Tool
 # Proprietary Evaluation License
-# July 23 2026 at 11 55 AM
+# July 23 2026 at 9 27 PM
 Copyright (c) 2025–2026
 Dr. Gummanur T. Manjunath, MD
 All Rights Reserved
@@ -18,7 +18,7 @@ import streamlit as st
 import textwrap
 from datetime import datetime
 
-APP_VERSION = "v1.10.2-test – Theme-Independent Mobile Display"
+APP_VERSION = "v1.10.2-test.1 – Mobile Contrast Polish"
 
 st.set_page_config(
     page_title="H.A.R.T - HEAT ASSESSMENT & RESPONSE TOOL",
@@ -505,6 +505,51 @@ hr { border-top-color: #cbd5e1 !important; }
     .sa-card, .ecce-detail-box, .kpi-card {
         font-size: 0.92rem !important;
         line-height: 1.40 !important;
+    }
+}
+
+
+/* ================================================================
+   HART MOBILE POLISH — v1.10.2-test.1
+   Darker action button and stronger expander/title contrast.
+   Presentation-only; no assessment logic changes.
+   ================================================================ */
+
+/* Primary action button: keep Calculate / Compute visually prominent
+   even though the app itself uses the fixed light field theme. */
+button[kind="primary"],
+[data-testid="stBaseButton-primary"],
+div.stButton > button[kind="primary"] {
+    background-color: #0b5a8f !important;
+    border-color: #0b5a8f !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+button[kind="primary"] *,
+[data-testid="stBaseButton-primary"] *,
+div.stButton > button[kind="primary"] * {
+    color: #ffffff !important;
+}
+
+/* Expander titles are operational navigation on phones.
+   Use a dark navy-blue rather than Streamlit's lighter inherited text. */
+div[data-testid="stExpander"] summary,
+div[data-testid="stExpander"] summary *,
+details summary,
+details summary * {
+    color: #123f63 !important;
+    font-weight: 750 !important;
+    opacity: 1 !important;
+}
+
+/* Slight extra emphasis on mobile where glare and small type reduce contrast. */
+@media (max-width: 700px) {
+    div[data-testid="stExpander"] summary,
+    div[data-testid="stExpander"] summary *,
+    details summary,
+    details summary * {
+        color: #0b3557 !important;
+        font-weight: 800 !important;
     }
 }
 
