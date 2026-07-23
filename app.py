@@ -4,7 +4,7 @@
 """
 HART — Heat Assessment & Response Tool
 # Proprietary Evaluation License
-# July 20 2026 at 6 35 PM
+# July 23 2026 at 11 55 AM
 Copyright (c) 2025–2026
 Dr. Gummanur T. Manjunath, MD
 All Rights Reserved
@@ -18,7 +18,7 @@ import streamlit as st
 import textwrap
 from datetime import datetime
 
-APP_VERSION = "v1.10.0 – GitHub Release"
+APP_VERSION = "v1.10.1 – GitHub Release"
 
 st.set_page_config(
     page_title="H.A.R.T - HEAT ASSESSMENT & RESPONSE TOOL",
@@ -2517,6 +2517,72 @@ div.block-container { padding-top: 1.05rem; padding-bottom: 1.15rem; }
 }
 
 /* keep Block 7 focused on cards and snapshot layout; landing-page button styling lives in the global CSS block */
+
+/* =========================================================
+   FINAL MOBILE / DARK-THEME CONTRAST AUTHORITY — v1.10.1
+   Keep this section LAST so broad Streamlit theme rules cannot
+   wash out text inside HART cards on Android/mobile browsers.
+   ========================================================= */
+
+/* Main page text must follow the actual dark Streamlit canvas. */
+@media (prefers-color-scheme: dark) {
+  body, .stApp, .stMarkdown, .stText,
+  div[data-testid="stMarkdownContainer"],
+  div[data-testid="stMarkdownContainer"] p,
+  div[data-testid="stMarkdownContainer"] li,
+  div[data-testid="stMarkdownContainer"] span,
+  .stCaption, label {
+      color: rgba(255,255,255,0.94) !important;
+      opacity: 1 !important;
+  }
+
+  .section-sub, .ui-muted, .ui-caption, .ui-help {
+      color: rgba(255,255,255,0.78) !important;
+      opacity: 1 !important;
+  }
+}
+
+/* Light HART cards always use dark ink, regardless of phone/OS theme. */
+.white-card, .white-card *,
+.kpi-card, .kpi-card *,
+.sa-card, .sa-card *,
+.ecce-detail-box, .ecce-detail-box *,
+.quick-card, .quick-card * {
+    color: #0b2239 !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+}
+
+.kpi-card .kpi-label, .kpi-card .kpi-foot,
+.white-card .ui-muted, .quick-card .ui-muted {
+    color: #475569 !important;
+}
+
+/* Preserve semantic accent colors inside cards where needed. */
+.sa-card [style*="color:#475569"],
+.ecce-detail-box [style*="color:#475569"] {
+    color: #475569 !important;
+}
+
+/* Native Streamlit status boxes: maintain readable text in either theme. */
+div[data-testid="stAlert"] p,
+div[data-testid="stAlert"] li,
+div[data-testid="stAlert"] span {
+    opacity: 1 !important;
+}
+
+/* Phone typography and spacing. */
+@media (max-width: 700px) {
+  .kpi-card, .sa-card, .ecce-detail-box, .quick-card {
+      font-size: 0.94rem !important;
+      line-height: 1.42 !important;
+  }
+  .kpi-label { font-size: 0.88rem !important; }
+  .kpi-value { font-size: 1.48rem !important; }
+  .kpi-sub, .kpi-foot { line-height: 1.38 !important; }
+  .quick-card ul, .sa-card ul { padding-left: 1.20rem !important; }
+  .quick-card li, .sa-card li { margin-bottom: 0.34rem !important; }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -3152,7 +3218,7 @@ for section, lines in [("Hydration", hydration_lines), ("Work-Rest", workrest_li
 quick_card_html_lines.append("<div style='margin-top:0.65rem;font-size:0.90rem;font-weight:700;'>Follow site HSE policy / SOP for WBGT- or TWL-based controls. Use HSP as an additional cooling-margin indicator.</div>")
 
 st.markdown(
-    "<div style='background:#dfeaf6;border-radius:10px;padding:14px 18px;color:#0a4f9b;'>" + "".join(quick_card_html_lines) + "</div>",
+    "<div class='quick-card' style='background:#dfeaf6;border-radius:10px;padding:14px 18px;color:#0b2239;'>" + "".join(quick_card_html_lines) + "</div>",
     unsafe_allow_html=True,
 )
 st.download_button(
